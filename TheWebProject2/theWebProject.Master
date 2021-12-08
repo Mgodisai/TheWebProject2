@@ -1,0 +1,129 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="theWebProject.master.cs" Inherits="TheWebProject2.theWebProject" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Recipe Book</title>
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    <asp:ContentPlaceHolder ID="headPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-2 col-lg-2 p-2" align="center align-center">
+                    <h1 class="text-lg-center font-weight-bold" href="#">My Recipe Book</h1>
+                </div>
+                <div class="col-md-8 col-lg-8 p-2" align="center">
+
+                    <img src="images/cook-book.png" width="120" height="120" />
+                </div>
+                <div class="col-md-2 col-lg-2 p-2" align="center">
+                </div>
+            </div>
+
+            <div class="row bg-dark">
+                <div class="col-lg-8 col-md-8">
+
+                    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div id="navbar" class="navbar-collapse collapse">
+
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <asp:LinkButton class="nav-link" ID="lbtHome" runat="server" OnClick="LbtHome_Click">Home</asp:LinkButton>
+                                </li>
+                                <li class="nav-item">
+                                    <asp:LinkButton class="nav-link" ID="lbtRecipes" runat="server" OnClick="LbtRecipes_Click">Recipes</asp:LinkButton>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Base Data<span class="caret"></span></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                        <asp:LinkButton class="dropdown-item" ID="lbtCategories" runat="server" OnClick="lbtCategories_Click">Categories</asp:LinkButton>
+                                        <asp:LinkButton class="dropdown-item" ID="lbtIngredients" runat="server" OnClick="LbtIngredients_Click">Ingredients</asp:LinkButton>
+                                        <asp:LinkButton class="dropdown-item" ID="lbtMeasures" runat="server" OnClick="LbtMeasures_Click">Measures</asp:LinkButton>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <asp:LinkButton class="nav-link" ID="lbtRecipeEditor" runat="server" OnClick="lbtRecipeEditor_Click">Edit Recipe</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+                <div class="col-lg-4 col-md-4 p-3">
+
+                    <asp:SiteMapPath ID="siteMapMain" class="nav-pills" runat="server" Font-Size="0.8em" PathSeparator=" : ">
+                        <CurrentNodeStyle ForeColor="#CCFF66" />
+                        <NodeStyle Font-Bold="True" ForeColor="#FF9999" />
+                        <PathSeparatorStyle Font-Bold="True" ForeColor="#990000" />
+                        <RootNodeStyle Font-Bold="True" ForeColor="#FF8000" />
+                    </asp:SiteMapPath>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <asp:ContentPlaceHolder ID="mainContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+                </div>
+
+            </div>
+
+            <div class="row bg-dark">
+
+                <footer class=" text-center text-white">
+                    <div class="container p-3">
+                        <section class="mb-4">
+                            <!-- Facebook -->
+                            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+                            <!-- Google -->
+                            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
+                            <!-- Instagram -->
+                            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+                            <!-- Linkedin -->
+                            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+                            <!-- Github -->
+                            <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+                        </section>
+                        <section class="mb-2">
+                            <div>
+                                Icons made by <a class="footerlinks" href="https://www.flaticon.com/authors/justicon" title="justicon">justicon</a> from <a class="footerlinks" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                                <br />
+                                and <a class="footerlinks" href="https://fontawesome.com/" title="Fontawesome">Fontawesome</a>
+                            </div>
+                            <div><a class="footerlinks" href='https://www.freepik.com/photos/food'>Food photo created by master1305 - www.freepik.com</a></div>
+                            <div><a class="footerlinks" href='https://www.freepik.com/photos/circle'>Circle photo created by jcomp - www.freepik.com</a></div>
+                        </section>
+
+                    </div>
+                    <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.3);">
+                        Varga Tamás - 2021
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+    </form>
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+</body>
+</html>

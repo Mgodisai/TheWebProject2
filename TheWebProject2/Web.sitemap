@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/Default.aspx" title="Home"  description="theRoot">
+	  <siteMapNode title="Base Data" description="">
+		  <siteMapNode url="~/Categories.aspx" title="Categories"  description="" />
+		  <siteMapNode url="~/Ingredients.aspx" title="Ingredients"  description="" />
+		  <siteMapNode url="~/Measures.aspx" title="Measure Units"  description="" /> 
+	  </siteMapNode>
+	  <siteMapNode url="~/Recipes.aspx" title="Recipes" description=""></siteMapNode>
+	  <siteMapNode url="~/RecipeEditor.aspx" title="Recipe editor" description=""></siteMapNode>
+  </siteMapNode>
+</siteMap>
