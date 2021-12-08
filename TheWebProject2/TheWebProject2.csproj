@@ -1733,9 +1733,12 @@
     <Content Include="fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\category.jpg" />
     <Content Include="images\cook-book.png" />
     <Content Include="images\gms-cookbook.jpg" />
     <Content Include="images\ingredients.jpg" />
+    <Content Include="images\mu.jpg" />
+    <Content Include="images\recipe.jpg" />
     <Content Include="images\rpics\bundaskenyer.jpg" />
     <Content Include="images\rpics\default.jpg" />
     <Content Include="images\rpics\nokedli.jpg" />

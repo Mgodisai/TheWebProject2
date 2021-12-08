@@ -17,7 +17,7 @@
                     <div class="row p-2">
                         <div class="col form-group">
                             <label for="ddlCategorySelector">Search by Category</label>
-                            <asp:DropDownList ID="ddlCategorySelector" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategorySelector_SelectedIndexChanged">
+                            <asp:DropDownList ID="ddlCategorySelector" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategorySelector_SelectedIndexChanged" CssClass="btn-outline-secondary dropdown-toggle">
                                 <asp:ListItem Value="-1">Choose a category</asp:ListItem>
                             </asp:DropDownList>
                             <hr>
@@ -45,17 +45,17 @@
                             <asp:GridView class="table table-striped table-bordered" ID="gvRecipes" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvRecipes_PageIndexChanging" OnSorting="gvRecipes_Sorting" DataKeyNames="id" OnRowDataBound="gvRecipes_RowDataBound" OnSelectedIndexChanged="gvRecipes_SelectedIndexChanged" PageSize="15" OnSelectedIndexChanging="gvRecipes_SelectedIndexChanging" AutoGenerateColumns="False">
                                 <PagerStyle HorizontalAlign="Center" />
                                 <Columns>
-                                    <asp:BoundField HeaderText="ID" DataField="id" ItemStyle-Width="15%" >
-<ItemStyle Width="15%"></ItemStyle>
+                                    <asp:BoundField HeaderText="ID" DataField="id" ItemStyle-Width="15%">
+                                        <ItemStyle Width="15%"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="Name" DataField="name" ItemStyle-Width="30%" >
-<ItemStyle Width="30%"></ItemStyle>
+                                    <asp:BoundField HeaderText="Name" DataField="name" ItemStyle-Width="30%">
+                                        <ItemStyle Width="30%"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-Width="40%" >
-<ItemStyle Width="40%"></ItemStyle>
+                                    <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-Width="40%">
+                                        <ItemStyle Width="40%"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="Category" DataField="Category" ItemStyle-Width="30%" >
-<ItemStyle Width="30%"></ItemStyle>
+                                    <asp:BoundField HeaderText="Category" DataField="Category" ItemStyle-Width="30%">
+                                        <ItemStyle Width="30%"></ItemStyle>
                                     </asp:BoundField>
                                 </Columns>
                                 <SelectedRowStyle BorderColor="#6699FF" BorderStyle="Double" BorderWidth="2pt" />
@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col pt-2 pb-4">
                                     <center>
-                                        <asp:Image ID="imgRecipe" runat="server" Width="400" ImageUrl="~/images/rpics/default.jpg" />
+                                        <asp:Image class="img-fluid" ID="imgRecipe" runat="server" Width="400" ImageUrl="~/images/rpics/default.jpg" />
                                     </center>
                                 </div>
                             </div>

@@ -26,18 +26,9 @@ namespace TheWebProject2
         protected void gvIngredients_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvIngredients.PageIndex = e.NewPageIndex;
-            bindGridView();
+            //bindGridView();
         }
 
-        protected void gvIngredients_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            if (IsPostBack)
-            {
-                gvIngredients.DataSource = IngredientTableAdapter.GetDataOrderByNameASC(e.SortExpression);
-                gvIngredients.DataBind();
-            }
-
-        }
 
         protected void tbxSearchIngredientByName_TextChanged(object sender, EventArgs e)
         {
@@ -106,6 +97,7 @@ namespace TheWebProject2
             tbxIngredientName.Text = "";
             tbxIngredientDesc.Text = "";
             lblIngredientMessage.Text = "";
+            gvIngredients.SelectedIndex = -1;
         }
 
         protected void btnIngredientsAdd_Click(object sender, EventArgs e)
@@ -202,7 +194,9 @@ namespace TheWebProject2
                 e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='GreenYellow'; this.style.cursor='pointer';this.style.textDecoration='underline';";
                 e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';this.style.textDecoration='none';";
                 e.Row.ToolTip = "Click name for selecting a row.";
-                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gvIngredients, "Select$" + e.Row.RowIndex);
+                e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gvIngredients, "Select$" + (e.Row.RowIndex));
+
+                
             }
         }
 
@@ -215,9 +209,9 @@ namespace TheWebProject2
 
         protected void gvIngredients_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbxIngredientID.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[1].Text);
-            tbxIngredientName.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[2].Text);
-            tbxIngredientDesc.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[3].Text);
+            tbxIngredientID.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[0].Text);
+            tbxIngredientName.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[1].Text);
+            tbxIngredientDesc.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[2].Text);
         }
     }
 }

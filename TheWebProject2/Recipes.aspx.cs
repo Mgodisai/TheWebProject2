@@ -89,7 +89,7 @@ namespace TheWebProject2
             //lblRecipeDescription.Text = HttpUtility.HtmlDecode(gvRecipes.SelectedRow.Cells[2].Text);
 
             // fill the labels with the data of the recipe
-            DataTable tdRecipe = recipeTableAdapter.GetRecipeInstructionByID(idParsed);
+            DataTable tdRecipe = recipeTableAdapter.GetRecipeByID(idParsed);
             lblRecipeName.Text = tdRecipe.Rows[0][1].ToString()+" ("+ tdRecipe.Rows[0][3].ToString()+")";
             lblRecipeDescription.Text = tdRecipe.Rows[0][2].ToString();
             lblRecipeInstructions.Text = tdRecipe.Rows[0][4].ToString();

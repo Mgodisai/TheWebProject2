@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContentPlaceHolder" runat="server">
     <div class="row">
         <div class="col-12 p-4" align="center">
-            <img src="images/gms-cookbook.jpg" />
+            <img class="img-fluid" src="images/gms-cookbook.jpg" />
         </div>
     </div>
 
