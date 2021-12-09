@@ -42,13 +42,16 @@
                         <div id="navbar" class="navbar-collapse collapse">
 
                             <ul class="navbar-nav mr-auto">
+
+
+                                
                                 <li class="nav-item active">
                                     <asp:LinkButton class="nav-link" ID="lbtHome" runat="server" OnClick="LbtHome_Click">Home</asp:LinkButton>
                                 </li>
                                 <li class="nav-item">
                                     <asp:LinkButton class="nav-link" ID="lbtRecipes" runat="server" OnClick="LbtRecipes_Click">Recipes</asp:LinkButton>
                                 </li>
-
+                                    <asp:Panel ID="panelMenuHider" runat="server">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Base Data<span class="caret"></span></a>
                                     <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -57,8 +60,18 @@
                                         <asp:LinkButton class="dropdown-item" ID="lbtMeasures" runat="server" OnClick="LbtMeasures_Click">Measures</asp:LinkButton>
                                     </div>
                                 </li>
+                                 </asp:Panel>
                                 <li class="nav-item">
                                     <asp:LinkButton class="nav-link" ID="lbtRecipeEditor" runat="server" OnClick="lbtRecipeEditor_Click">Edit Recipe</asp:LinkButton>
+                                </li>
+                               
+
+
+                                <li class="nav-item">
+                                    <asp:LinkButton class="nav-link" ID="lbtLogin" runat="server" OnClick="lbtLogin_Click">Login</asp:LinkButton>
+                                </li>
+                                <li class="nav-item">
+                                    <asp:LinkButton class="nav-link" ID="lbtLogout" runat="server" OnClick="lbtLogout_Click">Logout</asp:LinkButton>
                                 </li>
                             </ul>
                         </div>

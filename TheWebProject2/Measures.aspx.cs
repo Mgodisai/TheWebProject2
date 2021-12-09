@@ -15,7 +15,10 @@ namespace TheWebProject2
         const int MAX = 1000;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["role"] is null || Session["role"].Equals(""))
+            {
+                Response.Redirect("Login.aspx");
+            }
             gvMu.DataSource = measureTableAdapter.GetData();
             gvMu.DataBind();
             lblMuMessage.Text = "";

@@ -1735,6 +1735,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\category.jpg" />
     <Content Include="images\cook-book.png" />
+    <Content Include="images\generaluser.png" />
     <Content Include="images\gms-cookbook.jpg" />
     <Content Include="images\ingredients.jpg" />
     <Content Include="images\mu.jpg" />
@@ -1744,6 +1745,7 @@
     <Content Include="images\rpics\nokedli.jpg" />
     <Content Include="images\rpics\palacsinta.jpg" />
     <Content Include="Ingredients.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Measures.aspx" />
     <Content Include="RecipeEditor.aspx" />
     <Content Include="Recipes.aspx" />
@@ -1781,6 +1783,13 @@
     </Compile>
     <Compile Include="dstRecipeBook.cs">
       <DependentUpon>dstRecipeBook.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="RecipeFunctions.cs" />
     <Compile Include="Default.aspx.cs">

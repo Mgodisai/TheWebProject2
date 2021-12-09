@@ -11,7 +11,34 @@ namespace TheWebProject2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["role"] is null || Session["role"].Equals(""))
+                {
+                    lbtLogin.Visible = true;
+                    lbtLogout.Visible = false;
+                    lbtCategories.Visible = false;
+                    lbtMeasures.Visible = false;
+                    lbtIngredients.Visible = false;
+                    lbtRecipes.Visible = false;
+                    lbtRecipeEditor.Visible = false;
+                    lbtHome.Visible = false;
+                    siteMapMain.Visible = false;
+                    lbtLogout.Text = "Logout";
+                    panelMenuHider.Visible = false;
+                    
+                }
+                else
+                {
+                    lbtLogin.Visible = false; 
+                    lbtLogout.Visible = true; 
+                    lbtLogout.Text = "Logout (" + Session["fullname"] + ")";
+                }
+            }
+            catch (Exception ex)
+            {
 
+            }
         }
 
         protected void LbtIngredients_Click(object sender, EventArgs e)
@@ -42,6 +69,22 @@ namespace TheWebProject2
         protected void lbtCategories_Click(object sender, EventArgs e)
         {
             Response.Redirect("Categories.aspx");
+        }
+
+        protected void lbtLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void lbtLogout_Click(object sender, EventArgs e)
+        {
+            Session["email"] = "";
+            Session["fullname"] = "";
+            Session["role"] = "";
+            lbtLogin.Visible = true;
+            lbtLogout.Visible = false;
+
+            Response.Redirect("Default.aspx");
         }
     }
 }

@@ -15,20 +15,41 @@ namespace TheWebProject2
         RecipeTableAdapter recipeTableAdapter = new RecipeTableAdapter();
         CategoriesTableAdapter categoriesTableAdapter = new CategoriesTableAdapter();
         RecipeIngredientTableAdapter recipeIngredientTableAdapter = new RecipeIngredientTableAdapter();
+        IngredientTableAdapter ingredientTableAdapter = new IngredientTableAdapter();
+        MeasureTableAdapter measureTableAdapter = new MeasureTableAdapter();
         const int MAX = 1000;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["role"] is null || Session["role"].Equals(""))
+            {
+                Response.Redirect("Login.aspx");
+            }
             if (!this.IsPostBack)
             {
                 ddlCategoryInput.DataSource = categoriesTableAdapter.GetDataToDDL();
                 ddlCategoryInput.DataTextField = "name";
                 ddlCategoryInput.DataValueField = "id";
+                ddlCategoryInput.SelectedIndex=-1;
                 ddlCategoryInput.DataBind();
                 tbxSearchRecipeByName.Text = "";
 
                 gvRecipeEditor.DataSource = recipeTableAdapter.GetBaseData();
                 gvRecipeEditor.DataBind();
                 lblRecipeMessage.Text = "";
+
+                ddlIngredientSelector.DataSource = ingredientTableAdapter.GetDataOrderByName();
+                ddlIngredientSelector.DataTextField = "name";
+                ddlIngredientSelector.DataValueField = "id";
+                ddlIngredientSelector.SelectedIndex = -1;
+                ddlIngredientSelector.DataBind();
+
+                ddlMuSelector.DataSource = measureTableAdapter.GetDataOrderByName();
+                ddlMuSelector.DataTextField = "name";
+                ddlMuSelector.DataValueField = "id";
+                ddlMuSelector.SelectedIndex = -1;
+                ddlMuSelector.DataBind();
+
+
             }
 
 
@@ -287,9 +308,15 @@ namespace TheWebProject2
                 selectedValue: tdRecipe.Rows[0][5].ToString()
 
                 );
+            gvRecipeIngredients.DataSource = recipeIngredientTableAdapter.GetDataByRecipeID(idParsed);
+            gvRecipeIngredients.DataBind();
+
+            lblRecipeName.Text = tdRecipe.Rows[0][1].ToString();
+            lblRecipeDescription.Text = tdRecipe.Rows[0][2].ToString();
+
         }
 
-        private void populateDDL(string selectedValue)
+        private void populateDDLCategoryInput(string selectedValue)
         {
             ddlCategoryInput.DataSource = categoriesTableAdapter.GetDataToDDL();
             ddlCategoryInput.DataTextField = "name";
@@ -316,7 +343,71 @@ namespace TheWebProject2
             tbxHour.Text = hour;
             tbxMin.Text = min;
             tbxCalorie.Text = cal;
-            populateDDL(selectedValue);
+            populateDDLCategoryInput(selectedValue);
+        }
+
+        protected void btnSwap_Click(object sender, EventArgs e)
+        {
+            panelDetails.Visible = !panelDetails.Visible;
+            panelIngredients.Visible = !panelIngredients.Visible;
+        }
+
+        protected void btnAddNewIngredient_Click(object sender, EventArgs e)
+        {
+            int idParsed=-1, idIngredient=-1, idMu=-1;
+            double amount=0d;
+            try
+            {
+                 idParsed = Int32.Parse(gvRecipeEditor.SelectedRow.Cells[0].Text);
+                 idIngredient = Int32.Parse(ddlIngredientSelector.SelectedValue);
+                 idMu = Int32.Parse(ddlMuSelector.SelectedValue);
+                 amount = Double.Parse(tbxAmount.Text);
+            } catch (Exception ex)
+            {
+                lblRecipeMessage.Text = "Something went wrong!";
+                return;
+            }
+
+            if (idParsed > 0 && idIngredient > 0 && idMu > 0 && amount>0)
+            {
+                recipeIngredientTableAdapter.InsertQuery(idParsed, idIngredient, idMu, amount);
+                lblRecipeMessage.Text = "OK";
+                gvRecipeIngredients.DataSource = recipeIngredientTableAdapter.GetDataByRecipeID(idParsed);
+                gvRecipeIngredients.DataBind();
+            } else
+            {
+                lblRecipeMessage.Text = "Something went wrong!";
+                return;
+            }
+        }
+
+      
+        protected void btnDeleteAll_Click(object sender, EventArgs e)
+        {
+            int idParsed;
+            try
+            {
+                idParsed = Int32.Parse(gvRecipeEditor.SelectedDataKey.Value.ToString());
+                recipeIngredientTableAdapter.DeleteQueryByRecipeId(idParsed);
+                gvRecipeIngredients.DataSource = recipeIngredientTableAdapter.GetDataByRecipeID(idParsed);
+                gvRecipeIngredients.DataBind();
+            } catch (Exception ex)
+            {
+                lblRecipeMessage.Text = "Something went wrong!";
+            }
+            
+ 
+        }
+
+        protected void gvRecipeIngredients_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int idParsed = (int)gvRecipeIngredients.DataKeys[e.RowIndex][0];
+            int idIngredient = (int)gvRecipeIngredients.DataKeys[e.RowIndex][1];
+            int idMu = (int)gvRecipeIngredients.DataKeys[e.RowIndex][2];
+
+            recipeIngredientTableAdapter.DeleteQueryById(idParsed, idMu, idIngredient);
+            gvRecipeIngredients.DataSource = recipeIngredientTableAdapter.GetDataByRecipeID(idParsed);
+            gvRecipeIngredients.DataBind();
         }
     }
 }

@@ -20,6 +20,10 @@ namespace TheWebProject2
         RecipeIngredientTableAdapter recipeIngredientTableAdapter = new RecipeIngredientTableAdapter();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["role"] is null || Session["role"].Equals(""))
+            {
+                Response.Redirect("Login.aspx");
+            }
             if (!this.IsPostBack)
             {
                 ddlCategorySelector.DataSource = categoriesTableAdapter.GetDataToDDL();

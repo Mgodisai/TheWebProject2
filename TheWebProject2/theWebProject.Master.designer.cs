@@ -51,6 +51,15 @@ namespace TheWebProject2
         protected global::System.Web.UI.WebControls.LinkButton lbtRecipes;
 
         /// <summary>
+        /// panelMenuHider control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelMenuHider;
+
+        /// <summary>
         /// lbtCategories control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,24 @@ namespace TheWebProject2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtRecipeEditor;
+
+        /// <summary>
+        /// lbtLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtLogin;
+
+        /// <summary>
+        /// lbtLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtLogout;
 
         /// <summary>
         /// siteMapMain control.
