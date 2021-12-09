@@ -24,6 +24,15 @@ namespace TheWebProject2
         protected global::System.Web.UI.WebControls.TextBox tbxSearchRecipeByName;
 
         /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
         /// gvRecipeEditor control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace TheWebProject2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSwap;
+
+        /// <summary>
+        /// lblRecipeMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRecipeMessage;
 
         /// <summary>
         /// panelDetails control.
@@ -175,15 +193,6 @@ namespace TheWebProject2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
-
-        /// <summary>
-        /// lblRecipeMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRecipeMessage;
 
         /// <summary>
         /// panelIngredients control.

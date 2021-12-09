@@ -22,7 +22,6 @@ namespace TheWebProject2
             gvCat.DataSource = categoriesTableAdapter.GetData();
             gvCat.DataBind();
             lblCatMessage.Text = "";
-
         }
 
         protected void gvCat_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -31,22 +30,6 @@ namespace TheWebProject2
             bindGridView();
         }
 
-
-        protected void gvCat_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int id = (int)gvCat.DataKeys[e.RowIndex].Value;
-            try
-            {
-                categoriesTableAdapter.DeleteQuery(id);
-                lblCatMessage.Text = "Record, with id " + id + " has deleted!";
-                bindGridView();
-            }
-            catch (Exception ex)
-            {
-                lblCatMessage.Text = "Record can't be deleted: " + ex.Message;
-            }
-
-        }
         private void bindGridView()
         {
             gvCat.DataSource = categoriesTableAdapter.GetData();
@@ -70,9 +53,11 @@ namespace TheWebProject2
 
             if (dt.Rows.Count != 0)
             {
-                tbxCatID.Text = dt.Rows[0][0].ToString();
-                tbxCatName.Text = dt.Rows[0][1].ToString();
-                tbxCatDesc.Text = dt.Rows[0][2].ToString();
+                setDetailsFileds(
+                    id: dt.Rows[0][0].ToString(),
+                    name: dt.Rows[0][1].ToString(),
+                    desc: dt.Rows[0][2].ToString()
+                    );
             }
             else
             {
@@ -82,9 +67,7 @@ namespace TheWebProject2
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            tbxCatID.Text = "";
-            tbxCatName.Text = "";
-            tbxCatDesc.Text = "";
+            setDetailsFileds();
             lblCatMessage.Text = "";
             gvCat.SelectedIndex = -1;
         }
@@ -108,12 +91,9 @@ namespace TheWebProject2
 
                 categoriesTableAdapter.InsertQueryWithoutID(name, desc);
                 bindGridView();
-                lblCatMessage.Text += "OK!";
+                lblCatMessage.Text = "OK!";
 
-                tbxCatName.Text = "";
-                tbxCatDesc.Text = "";
-                tbxCatID.Text = "";
-
+                setDetailsFileds();
             }
         }
 
@@ -145,10 +125,7 @@ namespace TheWebProject2
             {
                 categoriesTableAdapter.UpdateQuery(name, desc, idParsed);
                 bindGridView();
-                lblCatMessage.Text += "OK!";
-                tbxCatName.Text = "";
-                tbxCatDesc.Text = "";
-                tbxCatID.Text = "";
+                lblCatMessage.Text = "OK!";
             }
         }
 
@@ -156,7 +133,6 @@ namespace TheWebProject2
         {
             int idParsed = -1;
             string message = "";
-            DataTable dt = null;
 
             idParsed = RecipeFunctions.idValidator(tbxCatID.Text, MAX, out message);
 
@@ -169,6 +145,7 @@ namespace TheWebProject2
                 categoriesTableAdapter.DeleteQuery(idParsed);
                 lblCatMessage.Text = "Record, with id " + idParsed + " has deleted!";
                 bindGridView();
+                setDetailsFileds();
             }
             catch (Exception ex)
             {
@@ -190,21 +167,32 @@ namespace TheWebProject2
         protected void gvCat_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
             GridViewRow row = gvCat.Rows[e.NewSelectedIndex];
-
             lblCatMessage.Text = gvCat.DataKeys[row.RowIndex].Value.ToString();
         }
 
         protected void gvCat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbxCatID.Text = HttpUtility.HtmlDecode(gvCat.SelectedRow.Cells[0].Text);
-            tbxCatName.Text = HttpUtility.HtmlDecode(gvCat.SelectedRow.Cells[1].Text);
-            tbxCatDesc.Text = HttpUtility.HtmlDecode(gvCat.SelectedRow.Cells[2].Text);
+            int idParsed = Int32.Parse(gvCat.SelectedDataKey.Value.ToString());
+            DataTable tdCategories = categoriesTableAdapter.GetDataById(idParsed);
+
+            setDetailsFileds(
+                id: tdCategories.Rows[0][0].ToString(),
+                name: tdCategories.Rows[0][1].ToString(),
+                desc: tdCategories.Rows[0][2].ToString()
+                );
         }
 
         protected void btnHideMessage_Click(object sender, EventArgs e)
         {
-
             panelMessage.Visible = !panelMessage.Visible;
+        }
+
+        private void setDetailsFileds(string id="", string name="", string desc = "")
+        {
+            tbxCatID.Text = id;
+            tbxCatName.Text = name;
+            tbxCatDesc.Text = desc;
+            
         }
     }
 }

@@ -20,8 +20,6 @@ namespace TheWebProject2
             {
                 Response.Redirect("Login.aspx");
             }
-
-
             gvIngredients.DataSource = IngredientTableAdapter.GetData();
             gvIngredients.DataBind();
             lblIngredientMessage.Text = "";
@@ -31,7 +29,7 @@ namespace TheWebProject2
         protected void gvIngredients_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvIngredients.PageIndex = e.NewPageIndex;
-            //bindGridView();
+            bindGridView();
         }
 
 
@@ -48,21 +46,6 @@ namespace TheWebProject2
             }
         }
 
-        protected void gvIngredients_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int id = (int)gvIngredients.DataKeys[e.RowIndex].Value;
-            try
-            {
-                IngredientTableAdapter.DeleteQuery(id);
-                lblIngredientMessage.Text = "Record, with id " + id + " has deleted!";
-                bindGridView();
-            }
-            catch (Exception ex)
-            {
-                lblIngredientMessage.Text = "Record can't be deleted: " + ex.Message;
-            }
-
-        }
         private void bindGridView()
         {
             gvIngredients.DataSource = IngredientTableAdapter.GetData();
@@ -86,9 +69,11 @@ namespace TheWebProject2
 
             if (dt.Rows.Count != 0)
             {
-                tbxIngredientID.Text = dt.Rows[0][0].ToString();
-                tbxIngredientName.Text = dt.Rows[0][1].ToString();
-                tbxIngredientDesc.Text = dt.Rows[0][2].ToString();
+                setDetailsFileds(
+                    id: dt.Rows[0][0].ToString(),
+                    name: dt.Rows[0][1].ToString(),
+                    desc: dt.Rows[0][2].ToString()
+                );
             }
             else
             {
@@ -98,9 +83,7 @@ namespace TheWebProject2
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            tbxIngredientID.Text = "";
-            tbxIngredientName.Text = "";
-            tbxIngredientDesc.Text = "";
+            setDetailsFileds();
             lblIngredientMessage.Text = "";
             gvIngredients.SelectedIndex = -1;
         }
@@ -124,12 +107,8 @@ namespace TheWebProject2
 
                 IngredientTableAdapter.InsertQueryWithoutID(name, desc);
                 bindGridView();
-                lblIngredientMessage.Text += "OK!";
-
-                tbxIngredientName.Text = "";
-                tbxIngredientDesc.Text = "";
-                tbxIngredientID.Text = "";
-
+                lblIngredientMessage.Text = "OK!";
+                setDetailsFileds();
             }
         }
 
@@ -137,7 +116,7 @@ namespace TheWebProject2
         {
             int idParsed = -1;
             string message = "";
-            DataTable dt=null;
+            DataTable dt = null;
 
             idParsed = RecipeFunctions.idValidator(tbxIngredientID.Text, MAX, out message);
 
@@ -161,10 +140,7 @@ namespace TheWebProject2
             {
                 IngredientTableAdapter.UpdateQuery(name, desc, idParsed);
                 bindGridView();
-                lblIngredientMessage.Text += "OK!";
-                tbxIngredientName.Text = "";
-                tbxIngredientDesc.Text = "";
-                tbxIngredientID.Text = "";
+                lblIngredientMessage.Text = "OK!";
             }
         }
 
@@ -172,7 +148,6 @@ namespace TheWebProject2
         {
             int idParsed = -1;
             string message = "";
-            DataTable dt = null;
 
             idParsed = RecipeFunctions.idValidator(tbxIngredientID.Text, MAX, out message);
 
@@ -185,6 +160,7 @@ namespace TheWebProject2
                 IngredientTableAdapter.DeleteQuery(idParsed);
                 lblIngredientMessage.Text = "Record, with id " + idParsed + " has deleted!";
                 bindGridView();
+                setDetailsFileds();
             }
             catch (Exception ex)
             {
@@ -195,28 +171,38 @@ namespace TheWebProject2
         protected void gvIngredients_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
-            {       
+            {
                 e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='GreenYellow'; this.style.cursor='pointer';this.style.textDecoration='underline';";
                 e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';this.style.textDecoration='none';";
                 e.Row.ToolTip = "Click name for selecting a row.";
                 e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(gvIngredients, "Select$" + (e.Row.RowIndex));
-
-                
             }
         }
 
         protected void gvIngredients_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
             GridViewRow row = gvIngredients.Rows[e.NewSelectedIndex];
-            
+
             lblIngredientMessage.Text = gvIngredients.DataKeys[row.RowIndex].Value.ToString();
         }
 
         protected void gvIngredients_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbxIngredientID.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[0].Text);
-            tbxIngredientName.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[1].Text);
-            tbxIngredientDesc.Text = HttpUtility.HtmlDecode(gvIngredients.SelectedRow.Cells[2].Text);
+            int idParsed = Int32.Parse(gvIngredients.SelectedDataKey.Value.ToString());
+            DataTable tdIngredient = IngredientTableAdapter.GetDataById(idParsed);
+
+            setDetailsFileds(
+               id: tdIngredient.Rows[0][0].ToString(),
+               name: tdIngredient.Rows[0][1].ToString(),
+               desc: tdIngredient.Rows[0][2].ToString()
+               );
+        }
+
+        private void setDetailsFileds(string id = "", string name = "", string desc = "")
+        {
+            tbxIngredientID.Text = id;
+            tbxIngredientName.Text = name;
+            tbxIngredientDesc.Text = desc;
         }
     }
 }

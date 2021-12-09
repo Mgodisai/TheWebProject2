@@ -17,14 +17,16 @@
                     <div class="row">
                         <div class="col form-group">
                             <label for="tbxSearchIngredientByName">Search by Name:</label>
-                            <asp:TextBox ID="tbxSearchIngredientByName" class="form-control" runat="server" OnTextChanged="tbxSearchIngredientByName_TextChanged" TextMode="Search"></asp:TextBox>
-
-                            <hr>
+                            <div class="input-group">
+                                <asp:TextBox ID="tbxSearchIngredientByName" class="form-control" runat="server" OnTextChanged="tbxSearchIngredientByName_TextChanged" TextMode="Search"></asp:TextBox>
+                                <asp:Button ID="Button1" runat="server" class="btn btn-outline-primary" Text="Search" UseSubmitBehavior="True" CausesValidation="false" />
+                                <hr>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <asp:GridView class="table table-striped table-bordered" ID="gvIngredients" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvIngredients_PageIndexChanging" OnRowDeleting="gvIngredients_RowDeleting" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvIngredients_RowDataBound" OnSelectedIndexChanged="gvIngredients_SelectedIndexChanged" OnSelectedIndexChanging="gvIngredients_SelectedIndexChanging">
+                            <asp:GridView class="table table-striped table-bordered" ID="gvIngredients" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvIngredients_PageIndexChanging" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvIngredients_RowDataBound" OnSelectedIndexChanged="gvIngredients_SelectedIndexChanged" OnSelectedIndexChanging="gvIngredients_SelectedIndexChanging">
                                 <PagerStyle HorizontalAlign="Center" />
                                 <SelectedRowStyle BorderColor="#CC0099" BorderStyle="Solid" BorderWidth="2px" />
                             </asp:GridView>
@@ -70,7 +72,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <asp:TextBox CssClass="form-control" ID="tbxIngredientID" runat="server" placeholder="ID"></asp:TextBox>
-                                    <asp:Button class="btn btn-primary" ID="btnIngredientGo" type="button" runat="server" Text="Go" OnClick="btnIngredientGo_Click" CausesValidation="false"/>
+                                    <asp:Button class="btn btn-primary" ID="btnIngredientGo" type="button" runat="server" Text="Go" OnClick="btnIngredientGo_Click" CausesValidation="false" />
                                 </div>
                             </div>
                         </div>
@@ -108,7 +110,7 @@
                             <asp:Button ID="btnIngredientsDelete" class="btn btn-md btn-block btn-danger" runat="server" Text="Delete" OnClick="btnIngredientsDelete_Click" />
                         </div>
                         <div class="col-3" align="center">
-                            <asp:Button ID="btnClear" class="btn btn-md btn-block btn-info" type="button" runat="server" Text="Clear" onclick="btnClear_Click" CausesValidation="false"/>
+                            <asp:Button ID="btnClear" class="btn btn-md btn-block btn-info" type="button" runat="server" Text="Clear" OnClick="btnClear_Click" CausesValidation="false" />
 
                         </div>
                     </div>

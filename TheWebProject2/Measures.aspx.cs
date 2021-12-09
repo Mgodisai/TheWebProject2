@@ -31,22 +31,6 @@ namespace TheWebProject2
             bindGridView();
         }
 
-    
-        protected void gvMu_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int id = (int)gvMu.DataKeys[e.RowIndex].Value;
-            try
-            {
-                measureTableAdapter.DeleteQuery(id);
-                lblMuMessage.Text = "Record, with id " + id + " has deleted!";
-                bindGridView();
-            }
-            catch (Exception ex)
-            {
-                lblMuMessage.Text = "Record can't be deleted: " + ex.Message;
-            }
-
-        }
         private void bindGridView()
         {
             gvMu.DataSource = measureTableAdapter.GetData();
@@ -70,9 +54,11 @@ namespace TheWebProject2
 
             if (dt.Rows.Count != 0)
             {
-                tbxMuID.Text = dt.Rows[0][0].ToString();
-                tbxMuName.Text = dt.Rows[0][1].ToString();
-                tbxMuDesc.Text = dt.Rows[0][2].ToString();
+                setDetailsFileds(
+                    id: dt.Rows[0][0].ToString(),
+                    name: dt.Rows[0][1].ToString(),
+                    desc: dt.Rows[0][2].ToString()
+                );
             }
             else
             {
@@ -82,9 +68,7 @@ namespace TheWebProject2
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            tbxMuID.Text = "";
-            tbxMuName.Text = "";
-            tbxMuDesc.Text = "";
+            setDetailsFileds();
             lblMuMessage.Text = "";
             gvMu.SelectedIndex = -1;
         }
@@ -108,11 +92,8 @@ namespace TheWebProject2
 
                 measureTableAdapter.InsertQueryWithoutID(name, desc);
                 bindGridView();
-                lblMuMessage.Text += "OK!";
-
-                tbxMuName.Text = "";
-                tbxMuDesc.Text = "";
-                tbxMuID.Text = "";
+                lblMuMessage.Text = "OK!";
+                setDetailsFileds();
 
             }
         }
@@ -145,10 +126,7 @@ namespace TheWebProject2
             {
                 measureTableAdapter.UpdateQuery(name, desc, idParsed);
                 bindGridView();
-                lblMuMessage.Text += "OK!";
-                tbxMuName.Text = "";
-                tbxMuDesc.Text = "";
-                tbxMuID.Text = "";
+                lblMuMessage.Text = "OK!";
             }
         }
 
@@ -169,6 +147,7 @@ namespace TheWebProject2
                 measureTableAdapter.DeleteQuery(idParsed);
                 lblMuMessage.Text = "Record, with id " + idParsed + " has deleted!";
                 bindGridView();
+                setDetailsFileds();
             }
             catch (Exception ex)
             {
@@ -196,15 +175,27 @@ namespace TheWebProject2
 
         protected void gvMu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbxMuID.Text = HttpUtility.HtmlDecode(gvMu.SelectedRow.Cells[0].Text);
-            tbxMuName.Text = HttpUtility.HtmlDecode(gvMu.SelectedRow.Cells[1].Text);
-            tbxMuDesc.Text = HttpUtility.HtmlDecode(gvMu.SelectedRow.Cells[2].Text);
+            int idParsed = Int32.Parse(gvMu.SelectedDataKey.Value.ToString());
+            DataTable tdMu = measureTableAdapter.GetDataById(idParsed);
+
+            setDetailsFileds(
+                id: tdMu.Rows[0][0].ToString(),
+                name: tdMu.Rows[0][1].ToString(),
+                desc: tdMu.Rows[0][2].ToString()
+            );
         }
 
         protected void btnHideMessage_Click(object sender, EventArgs e)
         {
-            
+
             panelMessage.Visible = !panelMessage.Visible;
+        }
+
+        private void setDetailsFileds(string id = "", string name = "", string desc = "")
+        {
+            tbxMuID.Text = id;
+            tbxMuName.Text = name;
+            tbxMuDesc.Text = desc;
         }
     }
 }

@@ -26,19 +26,15 @@ namespace TheWebProject2
                     siteMapMain.Visible = false;
                     lbtLogout.Text = "Logout";
                     panelMenuHider.Visible = false;
-                    
                 }
                 else
                 {
-                    lbtLogin.Visible = false; 
-                    lbtLogout.Visible = true; 
+                    lbtLogin.Visible = false;
+                    lbtLogout.Visible = true;
                     lbtLogout.Text = "Logout (" + Session["fullname"] + ")";
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception) { }
         }
 
         protected void LbtIngredients_Click(object sender, EventArgs e)
@@ -83,7 +79,6 @@ namespace TheWebProject2
             Session["role"] = "";
             lbtLogin.Visible = true;
             lbtLogout.Visible = false;
-
             Response.Redirect("Default.aspx");
         }
     }

@@ -20,7 +20,7 @@ namespace TheWebProject2
             {
                 number = Int32.Parse(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 message = "Please enter valid numbers as ID!";
                 return number;

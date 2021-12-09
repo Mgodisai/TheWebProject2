@@ -17,7 +17,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <asp:GridView class="table table-striped table-bordered" ID="gvMu" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvMu_PageIndexChanging" OnRowDeleting="gvMu_RowDeleting" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvMu_RowDataBound" OnSelectedIndexChanged="gvMu_SelectedIndexChanged" OnSelectedIndexChanging="gvMu_SelectedIndexChanging" AutoGenerateColumns="False">
+                            <asp:GridView class="table table-striped table-bordered" ID="gvMu" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvMu_PageIndexChanging" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvMu_RowDataBound" OnSelectedIndexChanged="gvMu_SelectedIndexChanged" OnSelectedIndexChanging="gvMu_SelectedIndexChanging" AutoGenerateColumns="False">
                                 <PagerStyle HorizontalAlign="Center" />
                                 <SelectedRowStyle BorderColor="#A7F432" BorderStyle="Solid" BorderWidth="2px" />
                                 <Columns>
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col p-4">
                             <center>
-                                <asp:Button ID="btnHideMessage" class="btn btn-outline-primary" runat="server" Text="Hide/Show Message panel" OnClick="btnHideMessage_Click" />
+                                <asp:Button ID="btnHideMessage" class="btn btn-outline-primary" runat="server" Text="Hide/Show Message panel" OnClick="btnHideMessage_Click" UseSubmitBehavior="False" />
                             </center>
                         </div>
                     </div>

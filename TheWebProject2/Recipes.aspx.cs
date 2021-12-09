@@ -39,11 +39,6 @@ namespace TheWebProject2
             }
         }
 
-        protected void gvRecipes_Sorting(object sender, GridViewSortEventArgs e)
-        {
-
-        }
-
         protected void gvRecipes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvRecipes.PageIndex = e.NewPageIndex;

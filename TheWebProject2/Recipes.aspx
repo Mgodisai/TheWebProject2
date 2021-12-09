@@ -42,7 +42,7 @@
                     asd
                     <div class="row">
                         <div class="col">
-                            <asp:GridView class="table table-striped table-bordered" ID="gvRecipes" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvRecipes_PageIndexChanging" OnSorting="gvRecipes_Sorting" DataKeyNames="id" OnRowDataBound="gvRecipes_RowDataBound" OnSelectedIndexChanged="gvRecipes_SelectedIndexChanged" PageSize="15" OnSelectedIndexChanging="gvRecipes_SelectedIndexChanging" AutoGenerateColumns="False">
+                            <asp:GridView class="table table-striped table-bordered" ID="gvRecipes" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvRecipes_PageIndexChanging" DataKeyNames="id" OnRowDataBound="gvRecipes_RowDataBound" OnSelectedIndexChanged="gvRecipes_SelectedIndexChanged" PageSize="15" OnSelectedIndexChanging="gvRecipes_SelectedIndexChanging" AutoGenerateColumns="False">
                                 <PagerStyle HorizontalAlign="Center" />
                                 <Columns>
                                     <asp:BoundField HeaderText="ID" DataField="id" ItemStyle-Width="15%">

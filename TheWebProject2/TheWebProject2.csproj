@@ -85,6 +85,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="css\myStyle.css" />
     <Content Include="Default.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="fontawesome\attribution.js" />
     <Content Include="fontawesome\css\all.css" />
     <Content Include="fontawesome\css\all.min.css" />

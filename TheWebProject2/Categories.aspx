@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/theWebProject.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" EnableEventValidation="false" Inherits="TheWebProject2.Categories" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContentPlaceHolder" runat="server">
@@ -16,13 +17,13 @@
 
                     <div class="row">
                         <div class="col">
-                            <asp:GridView class="table table-striped table-bordered" ID="gvCat" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvCat_PageIndexChanging" OnRowDeleting="gvCat_RowDeleting" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvCat_RowDataBound" OnSelectedIndexChanged="gvCat_SelectedIndexChanged" OnSelectedIndexChanging="gvCat_SelectedIndexChanging" AutoGenerateColumns="False">
+                            <asp:GridView class="table table-striped table-bordered" ID="gvCat" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvCat_PageIndexChanging" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvCat_RowDataBound" OnSelectedIndexChanged="gvCat_SelectedIndexChanged" OnSelectedIndexChanging="gvCat_SelectedIndexChanging" AutoGenerateColumns="False">
                                 <PagerStyle HorizontalAlign="Center" />
                                 <SelectedRowStyle BorderColor="#FA8072" BorderStyle="Solid" BorderWidth="2px" />
                                 <Columns>
-                                     <asp:BoundField HeaderText="Id" DataField="id" ItemStyle-Width="10%" />
-                                     <asp:BoundField HeaderText="Name" DataField="name" ItemStyle-Width="45%" />
-                                     <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-Width="45%" />
+                                    <asp:BoundField HeaderText="Id" DataField="id" ItemStyle-Width="10%" />
+                                    <asp:BoundField HeaderText="Name" DataField="name" ItemStyle-Width="45%" />
+                                    <asp:BoundField HeaderText="Description" DataField="description" ItemStyle-Width="45%" />
                                 </Columns>
                             </asp:GridView>
                         </div>
@@ -30,13 +31,11 @@
                     <div class="row">
                         <div class="col p-4">
                             <center>
-                                <asp:Button ID="btnHideMessage" class="btn btn-outline-primary" runat="server" Text="Hide/Show Message panel" OnClick="btnHideMessage_Click" />
+                                <asp:Button ID="btnHideMessage" class="btn btn-outline-primary" runat="server" Text="Hide/Show Message panel" OnClick="btnHideMessage_Click" UseSubmitBehavior="False" />
                             </center>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
 
@@ -116,13 +115,13 @@
 
                         </div>
                     </div>
-                     <asp:Panel ID="panelMessage" runat="server">
-                    <div class="row">
-                        <div class="col">
-                            <hr>
+                    <asp:Panel ID="panelMessage" runat="server">
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
                         </div>
-                    </div>
-                   
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <label>Messages:</label>
