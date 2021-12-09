@@ -9,9 +9,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>Recipe Book</title>
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
     <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
-    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+    
     <asp:ContentPlaceHolder ID="headPlaceHolder" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
