@@ -1832,8 +1832,8 @@ namespace TheWebProject2 {
                 this.columnid.AllowDBNull = false;
                 this.columnid.ReadOnly = true;
                 this.columnid.Unique = true;
-                this.columnname.MaxLength = 25;
-                this.columndescription.MaxLength = 50;
+                this.columnname.MaxLength = 50;
+                this.columndescription.MaxLength = 100;
                 this.columnCategory.AllowDBNull = false;
                 this.columnCategory.MaxLength = 50;
             }

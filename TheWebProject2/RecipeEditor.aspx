@@ -62,9 +62,6 @@
             </div>
 
         </div>
-    </div>
-
-
 
     <div class="col-md-7">
         <asp:Panel ID="panelDetails" runat="server" Visible="true">
@@ -278,4 +275,5 @@
             </div>
         </asp:Panel>
     </div>
+        </div>
 </asp:Content>

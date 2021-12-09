@@ -134,7 +134,6 @@ namespace TheWebProject2
         {
             int idParsed = -1;
             string message = "";
-            DataTable dt = null;
 
             idParsed = RecipeFunctions.idValidator(tbxMuID.Text, MAX, out message);
 
