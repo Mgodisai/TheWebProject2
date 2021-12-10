@@ -18,6 +18,8 @@ namespace TheWebProject2
         RecipeTableAdapter recipeTableAdapter = new RecipeTableAdapter();
         CategoriesTableAdapter categoriesTableAdapter = new CategoriesTableAdapter();
         RecipeIngredientTableAdapter recipeIngredientTableAdapter = new RecipeIngredientTableAdapter();
+        static bool isFilteredByText=false;
+        static bool isFilteredByDDL=false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["role"] is null || Session["role"].Equals(""))
@@ -29,22 +31,21 @@ namespace TheWebProject2
                 ddlCategorySelector.DataSource = categoriesTableAdapter.GetDataToDDL();
                 ddlCategorySelector.DataTextField = "name";
                 ddlCategorySelector.DataValueField = "id";
+                ddlCategorySelector.SelectedIndex = -1;
                 ddlCategorySelector.DataBind();
-                tbxSearchRecipeByName.Text = "";
+
 
                 gvRecipes.DataSource = recipeTableAdapter.GetBaseData();
                 gvRecipes.DataBind();
+                gvRecipes.SelectedIndex = -1;
+                tbxSearchRecipeByName.Text = "";
                 gvRecipeIngredients.DataSource = recipeIngredientTableAdapter.GetDataByRecipeID(-1);
                 gvRecipeIngredients.DataBind();
             }
-        }
 
-        protected void gvRecipes_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvRecipes.PageIndex = e.NewPageIndex;
-            gvRecipes.DataSource = recipeTableAdapter.GetBaseData();
-            gvRecipes.DataBind();
+
         }
+    
 
         protected void ddlCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -52,20 +53,34 @@ namespace TheWebProject2
 
             if (selectedID == -1)
             {
-                gvRecipes.DataSource = null;
+                if (isFilteredByText)
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetDataByNameOrDesc(tbxSearchRecipeByName.Text);
+                } else
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetBaseData();
+                }
+                gvRecipes.DataBind();    
+                isFilteredByDDL = false;
             }
             else
             {
-                gvRecipes.DataSource = recipeTableAdapter.GetDataByCategories(selectedID);
+                if (isFilteredByText)
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetDataByNameOrDescAndCat(tbxSearchRecipeByName.Text, selectedID);
+                } else
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetDataByCategories(selectedID);
+                }
+                isFilteredByDDL = true;
                 gvRecipes.DataBind();
             }
             panelRecipeDetails.Visible = false;
-            tbxSearchRecipeByName.Text = "";
         }
 
         protected void gvRecipes_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowState != DataControlRowState.Edit)
             {
                 e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='GreenYellow'; this.style.cursor='pointer';this.style.textDecoration='underline';";
                 e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';this.style.textDecoration='none';";
@@ -77,8 +92,7 @@ namespace TheWebProject2
         protected void gvRecipes_SelectedIndexChanged(object sender, EventArgs e)
         {
             // the id of the selected Recipe
-            int idParsed = Int32.Parse(gvRecipes.SelectedRow.Cells[0].Text);
-
+            int idParsed = Int32.Parse(gvRecipes.SelectedDataKey.Value.ToString());
             // populate the ingredient list of the selected Recipe
             DataTable td = recipeIngredientTableAdapter.GetDataByRecipeID(idParsed);
             gvRecipeIngredients.DataSource = td;
@@ -142,21 +156,32 @@ namespace TheWebProject2
             panelRecipeDetails.Visible = false;
             if (tbxSearchRecipeByName.Text == "")
             {
-                gvRecipes.DataSource = recipeTableAdapter.GetBaseData();
+                if (isFilteredByDDL)
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetDataByCategories(Int32.Parse(ddlCategorySelector.SelectedValue));
+                } else
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetBaseData();
+                }
+                isFilteredByText = false;
                 gvRecipes.DataBind();
             }
             else
             {
-                Debug.WriteLine(tbxSearchRecipeByName.Text);
-                gvRecipes.DataSource = recipeTableAdapter.GetDataByNameOrDesc(tbxSearchRecipeByName.Text);
+                if (isFilteredByDDL)
+                {
+                    gvRecipes.DataSource = recipeTableAdapter.GetDataByNameOrDescAndCat(tbxSearchRecipeByName.Text, Int32.Parse(ddlCategorySelector.SelectedValue));
+                    Debug.WriteLine(Int32.Parse(ddlCategorySelector.SelectedValue));
+                } else
+                {
+                    DataTable dt = recipeTableAdapter.GetDataByNameOrDesc(tbxSearchRecipeByName.Text);
+                    gvRecipes.DataSource = dt;
+
+                }
+                
                 gvRecipes.DataBind();
-
+                isFilteredByText = true;
             }
-            ddlCategorySelector.SelectedIndex = -1;
-
-
-
-
         }
 
         protected void btnFullRecipeList_Click(object sender, EventArgs e)
@@ -167,6 +192,30 @@ namespace TheWebProject2
             tbxSearchRecipeByName.Text = "";
             panelRecipeDetails.Visible = false;
             gvRecipes.SelectedIndex = -1;
+            gvRecipes.PageIndex = 0;
+            isFilteredByText = false;
+            isFilteredByDDL = false;
+        }
+
+        protected void gvRecipes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            Debug.WriteLine(e.NewPageIndex);
+            gvRecipes.PageIndex = e.NewPageIndex;
+
+            if (isFilteredByDDL&&isFilteredByDDL)
+            {
+                gvRecipes.DataSource = recipeTableAdapter.GetDataByNameOrDescAndCat(tbxSearchRecipeByName.Text, Int32.Parse(ddlCategorySelector.SelectedValue));
+            } else if (isFilteredByDDL)
+            {
+                gvRecipes.DataSource = recipeTableAdapter.GetDataByCategories(Int32.Parse(ddlCategorySelector.SelectedValue));
+            } else if (isFilteredByText)
+            {
+               gvRecipes.DataSource = recipeTableAdapter.GetDataByNameOrDesc(tbxSearchRecipeByName.Text);
+            } else
+            {
+                gvRecipes.DataSource = recipeTableAdapter.GetBaseData();
+            }
+            gvRecipes.DataBind();
         }
     }
 }

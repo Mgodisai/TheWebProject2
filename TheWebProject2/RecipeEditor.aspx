@@ -27,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <asp:GridView class="table table-striped table-bordered" ID="gvRecipeEditor" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnRowDeleting="gvRecipeEditor_RowDeleting" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvRecipeEditor_RowDataBound" OnSelectedIndexChanged="gvRecipeEditor_SelectedIndexChanged" AutoGenerateColumns="False" PageSize="15">
+                        <asp:GridView class="table table-striped table-bordered" ID="gvRecipeEditor" runat="server" AllowPaging="True" EmptyDataText="Empty table" HorizontalAlign="Center" OnRowDeleting="gvRecipeEditor_RowDeleting" DataKeyNames="id" EnablePersistedSelection="True" OnRowDataBound="gvRecipeEditor_RowDataBound" OnSelectedIndexChanged="gvRecipeEditor_SelectedIndexChanged" AutoGenerateColumns="False" PageSize="15">
                             <PagerStyle HorizontalAlign="Center" />
                             <SelectedRowStyle BorderColor="#CC0099" BorderStyle="Solid" BorderWidth="2px" />
                             <Columns>
@@ -113,7 +113,7 @@
                             <label>Recipe Category</label>
                             <div class="form-group">
                                 <!--<asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" placeholder="Recipe Name"></asp:TextBox> -->
-                                <asp:DropDownList ID="ddlCategoryInput" runat="server" Width="100%" CssClass="btn dropdown-toggle btn-outline-secondary" AutoPostBack="True">
+                                <asp:DropDownList ID="ddlCategoryInput" runat="server" Width="100%" CssClass="btn dropdown-toggle btn-outline-secondary" AutoPostBack="False">
                                     <asp:ListItem Value="-1">Choose a category</asp:ListItem>
                                 </asp:DropDownList>
                             </div>

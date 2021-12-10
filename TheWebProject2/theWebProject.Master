@@ -14,12 +14,6 @@
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Muli" />
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
-
-
-    <script src="Scripts/jquery-3.6.0.min.js"></script>
-    <script src="Scripts/popper.min.js"></script>
-    <script src="Scripts/bootstrap.bundle.min.js"></script>
-
     <asp:ContentPlaceHolder ID="headPlaceHolder" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
@@ -32,9 +26,10 @@
             <div class="row">
                 <!--left-->
                 <div class="col-md-2 col-lg-2 p-2">
-                    <center>
+                    <center><a class="myLinksHeader" href="Default.aspx">
                         <h1 class="text-danger myTitle">MyRecipe</h1>
                         <h1 class="text-danger myTitle">Book</h1>
+                        </a>
                     </center>
                 </div>
                 <!--center-->
@@ -159,5 +154,8 @@
         </div>
         <!--mainContainerEnd-->
     </form>
+     <script src="Scripts/jquery-3.6.0.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
 </body>
 </html>

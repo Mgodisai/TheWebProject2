@@ -55,7 +55,7 @@ namespace TheWebProject2
         protected void btnIngredientGo_Click(object sender, EventArgs e)
         {
 
-            DataTable dt = null;
+            DataTable dt; ;
             int idParsed = -1;
             string message = "";
 

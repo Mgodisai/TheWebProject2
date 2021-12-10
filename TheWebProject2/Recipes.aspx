@@ -16,8 +16,8 @@
                     </div>
                     <div class="row p-2">
                         <div class="col form-group">
-                            <label for="ddlCategorySelector">Search by Category</label>
-                            <asp:DropDownList ID="ddlCategorySelector" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategorySelector_SelectedIndexChanged" CssClass="btn-outline-secondary dropdown-toggle">
+                            <label for="ddlCategorySelector">Choose a Category</label>
+                            <asp:DropDownList ID="ddlCategorySelector" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategorySelector_SelectedIndexChanged" CssClass="btn-outline-secondary dropdown-toggle" AppendDataBoundItems="True">
                                 <asp:ListItem Value="-1">Choose a category</asp:ListItem>
                             </asp:DropDownList>
                             <hr>
@@ -25,24 +25,26 @@
                     </div>
                     <div class="row p-2">
                         <div class="col form-group">
-                            <label for="tbxSearchRecipeByName">Search by Name:</label>
-                            <asp:TextBox ID="tbxSearchRecipeByName" class="form-control" runat="server" AutoPostBack="True" OnTextChanged="tbxSearchRecipeByName_TextChanged"></asp:TextBox>
-
+                            <label for="tbxSearchRecipeByName">Search by (Name or Desc):</label>
+                            <div class="input-group">
+                            <asp:TextBox ID="tbxSearchRecipeByName" class="form-control" runat="server" TextMode="Search" OnTextChanged="tbxSearchRecipeByName_TextChanged"></asp:TextBox>
+                            <asp:Button ID="Button1" runat="server" class="btn btn-outline-primary" Text="Search" UseSubmitBehavior="True" CausesValidation="false" />
                             <hr>
+                                </div>
                         </div>
                     </div>
 
 
                     <div class="row p-2">
                         <div class="col form-group" align="center">
-                            <asp:Button ID="btnFullRecipeList" runat="server" Text="Reset List and Filters" CssClass="btn btn-primary" OnClick="btnFullRecipeList_Click" Width="80%" />
+                            <asp:Button ID="btnFullRecipeList" runat="server" Text="Reset List and Filters" CssClass="btn btn-primary" OnClick="btnFullRecipeList_Click" Width="80%" CausesValidation="false" UseSubmitBehavior="False" />
                             <hr>
                         </div>
                     </div>
-                    asd
+                    
                     <div class="row">
                         <div class="col">
-                            <asp:GridView class="table table-striped table-bordered" ID="gvRecipes" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="True" HorizontalAlign="Center" OnPageIndexChanging="gvRecipes_PageIndexChanging" DataKeyNames="id" OnRowDataBound="gvRecipes_RowDataBound" OnSelectedIndexChanged="gvRecipes_SelectedIndexChanged" PageSize="15" OnSelectedIndexChanging="gvRecipes_SelectedIndexChanging" AutoGenerateColumns="False">
+                            <asp:GridView class="table table-striped table-bordered" ID="gvRecipes" runat="server" AllowPaging="True" EmptyDataText="Empty table" EnableSortingAndPagingCallbacks="False" HorizontalAlign="Center" DataKeyNames="id" OnRowDataBound="gvRecipes_RowDataBound" OnSelectedIndexChanged="gvRecipes_SelectedIndexChanged" OnSelectedIndexChanging="gvRecipes_SelectedIndexChanging" AutoGenerateColumns="False" EnablePersistedSelection="True" OnPageIndexChanging="gvRecipes_PageIndexChanging" AllowSorting="True">
                                 <PagerStyle HorizontalAlign="Center" />
                                 <Columns>
                                     <asp:BoundField HeaderText="ID" DataField="id" ItemStyle-Width="15%">
@@ -59,7 +61,9 @@
                                     </asp:BoundField>
                                 </Columns>
                                 <SelectedRowStyle BorderColor="#6699FF" BorderStyle="Double" BorderWidth="2pt" />
+                               
                             </asp:GridView>
+                             
                         </div>
                     </div>
 
