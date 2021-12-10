@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Recipe List" Language="C#" MasterPageFile="~/theWebProject.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Recipes.aspx.cs" Inherits="TheWebProject2.Recipes" MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Title="Recipe List" Language="C#" MasterPageFile="~/theWebProject.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Recipes.aspx.cs" Inherits="TheWebProject2.Recipes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
 </asp:Content>
